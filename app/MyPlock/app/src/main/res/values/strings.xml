@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Mój Płock</string>
+    <string name="title_home">Lista</string>
+    <string name="title_dashboard">Mapa</string>
+    <string name="title_notifications">Inne</string>
+</resources>
