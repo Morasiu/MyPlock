@@ -1,12 +1,14 @@
 <?php
 require_once('config/config.php');
 
-	$stmt = $db->query(
+	$json = json_decode($_POST['JSON'], true);
+
+	$stmt = $db->prepare(
 		"SELECT
-			idEvent,
 			name,
-			fromDate,
+			description,
 			toDate,
+			fromDate,
 			place,
 			categoryName
 		FROM
@@ -15,11 +17,12 @@ require_once('config/config.php');
 			categories
 				ON events.idCategory = categories.idCategory
 		WHERE
-			toDate >= CURDATE()
-		ORDER BY fromDate ASC"
+			idEvent == :idEvent"
 	);
+	$stmt->bindValue(':idEvent', $json['id'], PDO::PARAM_INT);
 	$stmt->execute();
+
 	$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 	echo json_encode($result);
- ?>
+?>
